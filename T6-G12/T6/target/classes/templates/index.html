@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Editor di Testo</title>
+    <link rel="stylesheet" href="codemirror/lib/codemirror.css"/>
+    <link rel="stylesheet" href="codemirror/theme/lucario.css"/>
+    <link rel="stylesheet" href="codemirror/addon/fold/foldgutter.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="codemirror/lib/codemirror.js"></script>
+    <script src="codemirror/mode/clike/clike.js"></script>
+    <script src="codemirror/addon/fold/foldcode.js"></script>
+    <script src="codemirror/addon/fold/foldgutter.js"></script>
+    <script src="codemirror/addon/fold/brace-fold.js"></script>
+    <script src="codemirror/addon/fold/xml-fold.js"></script>
+    <script src="codemirror/addon/edit/matchbrackets.js"></script>
+    <script src="codemirror/addon/edit/closebrackets.js"></script>
+    <script src="codemirror/addon/edit/trailingspace.js"></script>
+    <script src="codemirror/addon/search/searchcursor.js"></script>
+    <script src="codemirror/addon/search/search.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:src="@{/js/register.js}"></script>
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="bigcontainer">
+    <div class="container">
+      <div class="editor-bar">
+        <span class="text">TextEditor</span>
+        <div class="image"></div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="container2">
+        <div class="top-bar">
+          <button class="user-button" title="Game Info" onclick="openInfoModal()"></button>
+          <div id="infoModal" class="modal2">
+            <div class="modal2-content">
+              <span class="close-button" onclick="closeInfoModal()">&times;</span>
+            </div>
+          </div>
+
+          <button class="theme-button" title="Change Theme"></button>
+          <button class="open-button" title="Open File"></button>
+          <button id="saveButton" class= "save-button" title="Save"></button>
+          <button class="saveAs-button" title="Save As" onclick="saveCode()"></button>
+          <button class="undo-button" title="Undo"></button>
+          <button class="redo-button" title="Redo"></button>
+
+          <button class="find-button" title="Find" onclick="openSearchModal()"></button>
+          <div id="searchModal" class="modal">
+            <div class="modal-content">
+              <span class="close-button" onclick="closeSearchModal()">&times;</span>
+              <label for="searchTerm">Parola da cercare:</label>
+              <input type="text" id="searchTerm">
+              <button id="startSearch" onclick="cercaParola()">Cerca</button>
+            </div>
+          </div>
+
+          <button class="replace-btn" title="Replace" onclick="openReplaceModal()"></button>
+          <div id="replaceModal" class="modal">
+            <div class="modal-content">
+              <span class="close-button" onclick="closeReplaceModal()">&times;</span>
+              <label for="replaceTerm">Parola con cui sostituire:</label>
+              <input type="text" id="replaceTerm">
+              <button id="startReplace" class="startReplace">Sostituisci</button>
+            </div>
+          </div>
+
+          <button id="compileButton" class="compile-button" title="Compile"></button>
+          <button id="runButton" class="run-button" title="Run"></button>
+          <button id="coverageButton" class="coverage-button" title="Run with JaCoCo"></button>
+        </div>
+        <textarea id="editor" name="editor">
+import org.junit.Before;
+import org.junit.After;
+import org.junit.BeforeClass;
+import org.junit.AfterClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+public class NomeClasseTest {
+    @BeforeClass
+    public static void setUpClass() {
+        // Eseguito una volta prima dell'inizio dei test nella classe
+        // Inizializza risorse condivise o esegui altre operazioni di setup
+    }
+    @AfterClass
+    public static void tearDownClass() {
+        // Eseguito una volta alla fine di tutti i test nella classe
+        // Effettua la pulizia delle risorse condivise o esegui altre operazioni di teardown
+    }
+    @Before
+    public void setUp() {
+        // Eseguito prima di ogni metodo di test
+        // Preparazione dei dati di input specifici per il test
+    }
+    @After
+    public void tearDown() {
+        // Eseguito dopo ogni metodo di test
+        // Pulizia delle risorse o ripristino dello stato iniziale
+    }
+    @Test
+    public void testMetodo() {
+        // Preparazione dei dati di input
+        // Esegui il metodo da testare
+        // Verifica l'output o il comportamento atteso
+        // Utilizza assert per confrontare il risultato atteso con il risultato effettivo
+    }
+    // Aggiungi altri metodi di test se necessario
+}
+        </textarea>
+      </div>
+      <div class="container2">
+        <div class="top-bar2">
+          Class Under Test
+        </div>
+        <textarea id="sidebar-textarea"></textarea>
+      </div>    
+    </div>
+    <div class="container">
+      <div class="container2">
+        <div class="top-bar2">
+          Console
+        </div>
+        <div class="console">
+          <textarea id="console-textarea"></textarea>
+        </div>
+      </div>
+      
+      <div class="container2">
+        <div class="top-bar2">
+          Confronto risultati
+        </div>
+        <div class="console">
+          <textarea id="console-textarea2"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+  </body>
+</html>
